@@ -10,6 +10,7 @@ class MainWindow(QMainWindow, Ui_Calculadora):
 
         self.texto_conta = ""
 
+        # Função para adicionar os numeros no display 2.
         def add_num(num):
             if str(self.texto_conta) != "":
                 self.display_1.setText("")
@@ -22,12 +23,14 @@ class MainWindow(QMainWindow, Ui_Calculadora):
                 self.display_2.setText(texto_inicial + num)
             self.btn_ac.setText("CE")
 
+        # Função para adicionar o ponto e verificar se existe outro ponto no número.
         def add_ponto(pt):
             texto_inicial = self.display_2.text()
             if not "." in texto_inicial:
                 self.display_2.setText(texto_inicial + pt)
                 self.btn_ac.setText("CE")
 
+        # Função para limpar os displays ou apagar somente um digito.
         def deletar():
             if self.btn_ac.text() == "AC":
                 self.display_1.setText("")
@@ -40,6 +43,7 @@ class MainWindow(QMainWindow, Ui_Calculadora):
                     self.btn_ac.setText("AC")
                 self.display_2.setText(texto_inicial)
 
+        # Função para adicionar os sinais matemáticos.
         def add_sinais(sinal):
             texto_inicial_1 = self.display_1.text()
             texto_inicial_2 = self.display_2.text()
@@ -51,6 +55,7 @@ class MainWindow(QMainWindow, Ui_Calculadora):
                 self.display_1.setText(f"{texto_inicial_1} {texto_inicial_2} {sinal}")
             self.display_2.setText("0")
 
+        # Função para adicionar o símbolo de porcentagem
         def add_pc():
             texto_inicial_1 = self.display_1.text()
             texto_inicial_2 = self.display_2.text()
@@ -61,6 +66,7 @@ class MainWindow(QMainWindow, Ui_Calculadora):
                     self.display_1.setText(f"{texto_inicial_2}%")
                 self.display_2.setText("0")
 
+        # Função para adicionar o parênteses.
         def add_ap_fp(p):
             texto_inicial_1 = self.display_1.text()
             texto_inicial_2 = self.display_2.text()
@@ -77,6 +83,7 @@ class MainWindow(QMainWindow, Ui_Calculadora):
                 else:
                     self.display_1.setText(f"{texto_inicial_1} {p}")
 
+        # Função que faz o calculo e retorna o resultado.
         def calcular():
             texto_inicial_1 = self.display_1.text()
             texto_inicial_2 = self.display_2.text()
@@ -104,7 +111,7 @@ class MainWindow(QMainWindow, Ui_Calculadora):
                     self.display_2.setText("Erro na conta!")
                 self.btn_ac.setText("AC")
             
-
+        # Linhas para conectar os botões com as funções.
         self.btn_0.clicked.connect(lambda: add_num(self.btn_0.text()))
         self.btn_1.clicked.connect(lambda: add_num(self.btn_1.text()))
         self.btn_2.clicked.connect(lambda: add_num(self.btn_2.text()))
@@ -132,7 +139,7 @@ class MainWindow(QMainWindow, Ui_Calculadora):
 
         self.btn_igual.clicked.connect(calcular)
 
-
+# Comandos para iniciar a parte gráfica.
 if __name__ == "__main__":
     qt = QApplication(sys.argv)
     view = MainWindow()
